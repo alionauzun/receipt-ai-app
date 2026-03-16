@@ -1,0 +1,43 @@
+# Node
+node_modules/
+npm-debug.log
+
+# Environment variables
+.env
+
+eng.traineddata/
+
+# uploads (user files)
+uploads/
+
+# OCR models
+*.traineddata
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Build
+dist/
+build/
+
+# Test coverage
+coverage/
+
+# VSCode
+.vscode/
+
+# Mobile builds (future)
+.dart_tool/
+android/
+ios/build/
