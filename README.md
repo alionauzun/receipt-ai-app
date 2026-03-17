@@ -1,212 +1,197 @@
-# receipt-ai-app
+Parfait 🔥 on va te créer un **README professionnel façon startup** que tu peux directement copier sur GitHub.
 
-Receipt AI est une application intelligente permettant aux utilisateurs de scanner leurs tickets de caisse, analyser leurs dépenses et recevoir des recommandations personnalisées pour économiser et consommer plus intelligemment.
-L'objectif est de transformer les tickets de caisse en données exploitables sur la consommation quotidienne.
+---
 
-📱 Aperçu de l'application
+# 📄 README.md (copie/colle)
 
-Dashboard
+```markdown
+# 🧾 Receipt AI App
 
-Statistiques globales de dépenses.
+Une application intelligente qui permet aux utilisateurs de scanner leurs tickets de caisse, analyser leurs dépenses et recevoir des recommandations personnalisées grâce à l’intelligence artificielle.
 
-Scanner de ticket
+---
 
-Scan d’un ticket via photo ou QR code.
+## 🚀 Vision
 
-Analyse des dépenses
+Permettre à chaque utilisateur de :
 
-Statistiques détaillées par :
-* magasin
-* produit
-* catégorie
-* période (jour / mois / année)
+- Suivre ses dépenses automatiquement
+- Comprendre sa consommation (produits, quantités, catégories)
+- Recevoir des conseils personnalisés pour économiser et consommer plus sainement
 
-Conseils IA
+---
 
-Recommandations personnalisées :
-* réduire certaines dépenses
-* alternatives moins chères
-* produits plus sains
+## ✨ Fonctionnalités
 
-🎯 Vision du projet
+### 📸 Scan de tickets
+- Upload d’image (ticket de caisse)
+- OCR pour extraire le texte
 
-Aujourd’hui les tickets de caisse sont perdus ou inutilisés.
-Receipt AI transforme ces tickets en :
-* historique de consommation
-* analyse budgétaire
-* conseils intelligents
-L'objectif long terme :
-devenir le "Google Analytics de la consommation personnelle"
+### 🧠 Analyse intelligente
+- Extraction des produits, prix et quantités
+- Normalisation des noms produits
+- Détection automatique des nouveaux produits
 
-🧠 Fonctionnalités principales
+### 📊 Statistiques
+- Dépenses par magasin
+- Dépenses par catégorie
+- Consommation par produit (jour / mois / année)
 
-📷 Scan intelligent
+### 🤖 IA & Recommandations
+- Suggestions d’économies
+- Produits alternatifs
+- Analyse des habitudes de consommation
 
-* OCR automatique
-* détection des produits
-* catégorisation automatique
-📊 Analyse des dépenses
+---
 
-* dépenses par magasin
-* dépenses par produit
-* évolution mensuelle
-📦 Analyse de consommation
+## 🏗️ Architecture
 
-* quantité consommée
-* fréquence d'achat
-* produits les plus achetés
-🤖 Recommandations IA
+### Backend
+- Node.js + Express
+- API REST
 
-* conseils d'économie
-* produits alternatifs
-* analyse de consommation
+### Base de données
+- PostgreSQL
 
-🏗 Architecture du projet
+### IA / Data
+- OCR (Tesseract)
+- Product Matching (fuzzy + embeddings)
+- Knowledge Graph produits
+- Recommendation Engine
 
-Mobile App
-   ↓
-API Backend (Node.js)
-   ↓
-OCR Service
-   ↓
-AI Analysis
-   ↓
-PostgreSQL Database
+---
 
-Technologies utilisées :
-Backend :
-* Node.js
-* Express.js
-* JWT Authentication
-Base de données :
-* PostgreSQL
-Mobile :
-* Flutter / React Native
-AI :
-* OCR (Tesseract / Google Vision)
-* IA d'analyse
+## 📂 Structure du projet
 
-📂 Structure du projet
+```
 
-receipt-ai
+receipt-ai-app
 │
 ├── backend
 │   ├── config
 │   ├── controllers
-│   ├── routes
 │   ├── middleware
+│   ├── routes
 │   ├── services
+│   ├── uploads (ignored)
 │   └── server.js
 │
-├── mobile_app
-│
-├── ai_services
-│
-├── docs
-│   └── screenshots
-│
-└── README.md
+├── .gitignore
+├── README.md
+└── package.json
 
+````
 
-⚙️ Installation
+---
 
-1 Cloner le projet
+## ⚙️ Installation
 
-git clone https://github.com/USERNAME/receipt-ai.git
-cd receipt-ai/backend
-
-
-2 Installer les dépendances
-
+```bash
+git clone https://github.com/TON_USERNAME/receipt-ai-app.git
+cd receipt-ai-app/backend
 npm install
+````
 
+---
 
-3 Configurer l'environnement
+## ▶️ Lancer le projet
 
-Créer un fichier .env
-PORT=3000
-
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=receipt_ai
-DB_USER=postgres
-DB_PASSWORD=YOUR_PASSWORD
-
-JWT_SECRET=supersecretkey
-
-
-4 Lancer le serveur
-
+```bash
 node server.js
+```
 
-API disponible sur :
+Serveur disponible sur :
+
+```
 http://localhost:3000
+```
 
+---
 
-🔌 API principales
+## 🔐 API Endpoints
 
-Authentification
+### Auth
 
+#### Register
+
+```
 POST /api/auth/register
+```
+
+#### Login
+
+```
 POST /api/auth/login
+```
 
-Tickets
+---
 
+### Receipts
+
+#### Upload ticket
+
+```
 POST /api/receipts/upload
-GET /api/receipts
+```
 
-Statistiques
+---
 
-GET /api/stats/monthly
-GET /api/stats/products
-GET /api/stats/stores
+## 🧪 Exemple de requête (Postman)
+
+```json
+{
+  "email": "test@mail.com",
+  "password": "123456"
+}
+```
+
+---
+
+## 📈 Roadmap
+
+### MVP
+
+* [x] Authentification
+* [x] OCR tickets
+* [x] Parser produits
+
+### V1
+
+* [ ] Product matching intelligent
+* [ ] Statistiques utilisateur
+* [ ] Dashboard
+
+### V2
+
+* [ ] Recommandations IA
+* [ ] Knowledge Graph produits
+* [ ] Auto-learning database
+
+---
+
+## 🧠 Vision long terme
+
+Créer une plateforme capable de :
+
+* Analyser la consommation mondiale
+* Aider à réduire les dépenses
+* Améliorer la santé alimentaire
+* Optimiser les achats
+
+---
+
+## 👨‍💻 Auteur
+
+Projet développé par Aliona Balti
+
+---
+
+## 📄 License
+
+MIT
+
+```
+
+---
 
 
-🗄 Base de données
-
-Tables principales :
-users
-stores
-receipts
-products
-receipt_items
-
-Relation principale :
-User
-  ↓
-Receipts
-  ↓
-Receipt Items
-  ↓
-Products
-
-
-🛣 Roadmap produit
-
-MVP
-
-* authentification utilisateur
-* upload ticket
-* extraction produits OCR
-* historique tickets
-
-V1
-
-* statistiques dépenses
-* analyse consommation
-* dashboard mobile
-
-V2
-
-* recommandations IA
-* analyse nutritionnelle
-* comparaison prix magasins
-
-📜 Licence
-
-Projet sous licence MIT.
-
-⭐ Support
-
-Si le projet te plaît :
-⭐ Star le repository
