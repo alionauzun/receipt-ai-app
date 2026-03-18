@@ -33,6 +33,20 @@ exports.uploadReceipt = async (req, res) => {
         match = await learnNewProduct(product.name);
       }
 
+      //je souvgarde l'achat
+      await pool.query(
+        `
+        INSERT INTO purchases (user_id, product_id, price, quantity)
+        VALUES ($1, $2, $3, $4)
+        `,
+        [
+          1, // temporaire (user mock)
+          match.id,
+          product.price || 0,
+          product.quantity || 1
+        ]
+      );
+
       enrichedProducts.push({
         ...product,
         productId: match.id,
