@@ -1,8 +1,8 @@
+require("dotenv").config();
+console.log("API KEY:", process.env.OPENAI_API_KEY);
 const express = require("express");
 const cors = require("cors");
-
-const authRoutes = require("./routes/authRoutes");
-const receiptRoutes = require("./routes/receiptRoutes");
+const authRoutes = require("./routes/authRoutes"); const receiptRoutes = require("./routes/receiptRoutes");
 
 const app = express();
 
