@@ -1,37 +1,21 @@
-const Fuse = require("fuse.js");
+const pool = require("../config/database");
+const { createEmbedding } = require("./embeddingService");
 
-function matchProducts(lines, products) {
+async function matchProduct(name) {
 
-  const fuse = new Fuse(products, {
-    keys: ["name"],
-    threshold: 0.4
-  });
+  // ✅ DEBUG DB
+  const dbCheck = await pool.query("SELECT current_database()");
+  console.log("DB:", dbCheck.rows);
 
-  const results = [];
+  const tableCheck = await pool.query(`
+    SELECT column_name 
+    FROM information_schema.columns 
+    WHERE table_name = 'products'
+  `);
+  console.log("COLUMNS:", tableCheck.rows);
 
-  for (const line of lines) {
-
-    const match = fuse.search(line);
-
-    if (match.length > 0) {
-
-      results.push({
-        original: line,
-        matched: match[0].item.name
-      });
-
-    } else {
-
-      results.push({
-        original: line,
-        matched: null
-      });
-
-    }
-
-  }
-
-  return results;
+  // 👉 STOP ICI POUR TEST
+  return null;
 }
 
-module.exports = { matchProducts };
+module.exports = { matchProduct };
