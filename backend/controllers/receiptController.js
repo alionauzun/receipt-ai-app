@@ -5,11 +5,11 @@ const { matchProduct } = require("../services/productMatcher");
 const { learnNewProduct } = require("../services/productLearning");
 
 exports.uploadReceipt = async (req, res) => {
-
   try {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
+
     const userId = req.user.userId;
     const imagePath = req.file.path;
 
@@ -24,18 +24,17 @@ exports.uploadReceipt = async (req, res) => {
       if (!match) {
         match = await learnNewProduct(product.name);
       }
-      //je souvgarde l'achat
+
       await pool.query(
         `
         INSERT INTO purchases (user_id, product_id, price, quantity)
         VALUES ($1, $2, $3, $4)
         `,
         [
-          1, // temporaire (user mock)
           userId,
           match.id,
           product.price || 0,
-          product.quantity || 1
+          product.qty || product.quantity || 1
         ]
       );
 
@@ -52,9 +51,7 @@ exports.uploadReceipt = async (req, res) => {
       message: "Receipt scanned",
       products: enrichedProducts
     });
-
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-
 };
