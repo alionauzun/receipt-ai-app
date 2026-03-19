@@ -7,32 +7,23 @@ const { learnNewProduct } = require("../services/productLearning");
 exports.uploadReceipt = async (req, res) => {
 
   try {
-
-    console.log("🔥 uploadReceipt appelé");
-
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
-
+    const userId = req.user.userId;
     const imagePath = req.file.path;
 
     const text = await readReceipt(imagePath);
-
     const products = parseReceipt(text);
 
     const enrichedProducts = [];
 
     for (const product of products) {
-
-      console.log("👉 matchProduct appelé avec :", product.name);
-
       let match = await matchProduct(product.name);
 
       if (!match) {
-        console.log("🆕 Nouveau produit → apprentissage");
         match = await learnNewProduct(product.name);
       }
-
       //je souvgarde l'achat
       await pool.query(
         `
@@ -41,6 +32,7 @@ exports.uploadReceipt = async (req, res) => {
         `,
         [
           1, // temporaire (user mock)
+          userId,
           match.id,
           product.price || 0,
           product.quantity || 1

@@ -1,12 +1,24 @@
 const express = require("express");
 const router = express.Router();
+const authMiddleware = require("../middleware/authMiddleware");
 const { getDashboard } = require("../services/dashboardService");
 
-router.get("/", async (req, res) => {
+// ROUTE DASHBOARD SÉCURISÉE
+router.get("/dashboard", authMiddleware, async (req, res) => {
 
-  const data = await getDashboard(1);
+  try {
 
-  res.json(data);
+    // récupérer user depuis le token
+    const userId = req.user.userId;
+
+    // appeler le service avec le vrai user
+    const data = await getDashboard(userId);
+    res.json(data);
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+
 });
 
 module.exports = router;

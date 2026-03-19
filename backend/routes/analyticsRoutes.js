@@ -1,19 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const { getMonthlySpending } = require("../services/analyticsService");
 
-router.get("/monthly", async (req, res) => {
+const authMiddleware = require("../middleware/authMiddleware");
+const { getMonthlyAnalytics } = require("../services/analyticsService");
 
-  const data = await getMonthlySpending(1);
+// 🔥 analytics mensuelles sécurisées
+router.get("/monthly", authMiddleware, async (req, res) => {
 
-  res.json(data);
-});
+  try {
 
-router.get("/recommendations", async (req, res) => {
-
-    const data = await getTopProducts(1);
-  
+    // ✅ récupérer user depuis token
+    const userId = req.user.userId;
+    const data = await getMonthlyAnalytics(userId);
     res.json(data);
-  });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+
+});
 
 module.exports = router;

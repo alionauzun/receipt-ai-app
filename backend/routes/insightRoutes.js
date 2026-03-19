@@ -1,18 +1,21 @@
 const express = require("express");
 const router = express.Router();
 
-const { getCategoryInsights, generateInsights } = require("../services/insightService");
+const authMiddleware = require("../middleware/authMiddleware");
+const { getInsights } = require("../services/insightService");
 
-router.get("/", async (req, res) => {
+// 🔥 Insights utilisateur sécurisés
+router.get("/", authMiddleware, async (req, res) => {
 
-  const categories = await getCategoryInsights(1);
+  try {
 
-  const insights = generateInsights(categories);
+    const userId = req.user.userId;
+    const insights = await getInsights(userId);
+    res.json(insights);
 
-  res.json({
-    categories,
-    insights
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 
 });
 

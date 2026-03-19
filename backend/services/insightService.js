@@ -1,5 +1,4 @@
 const pool = require("../config/database");
-
 async function getCategoryInsights(userId) {
 
   const result = await pool.query(

@@ -1,18 +1,15 @@
 const pool = require("../config/database");
 
 async function getDashboard(userId) {
-
-  // 💰 Total dépenses
   const total = await pool.query(
     `
-    SELECT SUM(price * quantity) AS total
+    SELECT COALESCE(SUM(price * quantity), 0) AS total
     FROM purchases
     WHERE user_id = $1
     `,
     [userId]
   );
 
-  // 📊 Dépenses par mois
   const monthly = await pool.query(
     `
     SELECT DATE_TRUNC('month', created_at) AS month,
@@ -25,10 +22,9 @@ async function getDashboard(userId) {
     [userId]
   );
 
-  // 🛒 Top produits
   const topProducts = await pool.query(
     `
-    SELECT p.name, COUNT(*) as count
+    SELECT p.name, COUNT(*) AS count
     FROM purchases pu
     JOIN products p ON pu.product_id = p.id
     WHERE pu.user_id = $1
@@ -40,7 +36,7 @@ async function getDashboard(userId) {
   );
 
   return {
-    total: total.rows[0].total || 0,
+    total: total.rows[0].total,
     monthly: monthly.rows,
     topProducts: topProducts.rows
   };
