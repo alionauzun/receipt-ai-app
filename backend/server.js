@@ -1,5 +1,4 @@
-require("dotenv").config();
-console.log("API KEY:", process.env.OPENAI_API_KEY);
+require("dotenv").config({ path: __dirname + "/.env" });
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes"); const receiptRoutes = require("./routes/receiptRoutes");
@@ -7,7 +6,6 @@ const analyticsRoutes = require("./routes/analyticsRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const insightRoutes = require("./routes/insightRoutes");
 const aiRoutes = require("./routes/aiRoutes");
-
 
 const app = express();
 

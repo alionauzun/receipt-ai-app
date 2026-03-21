@@ -4,7 +4,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 const { getDashboard } = require("../services/dashboardService");
 
 // ROUTE DASHBOARD SÉCURISÉE
-router.get("/dashboard", authMiddleware, async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
 
   try {
 

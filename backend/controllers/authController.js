@@ -33,6 +33,7 @@ exports.register = async (req, res) => {
 
 };
 exports.login = async (req, res) => {
+  console.log("LOGIN HIT");
     console.log("BODY:", req.body);
     if (!req.body) {
         return res.status(400).json({ message: "Request body missing" });
@@ -48,7 +49,7 @@ exports.login = async (req, res) => {
         "SELECT * FROM users WHERE email=$1",
         [email]
       );
-  
+      console.log("USER QUERY RESULT:", result.rows);
       if (result.rows.length === 0) {
         return res.status(401).json({ message: "User not found" });
       }
@@ -56,24 +57,27 @@ exports.login = async (req, res) => {
       const user = result.rows[0];
   
       const validPassword = await bcrypt.compare(password, user.password);
-  
+      console.log("PASSWORD VALID:", validPassword);
       if (!validPassword) {
         return res.status(401).json({ message: "Invalid password" });
       }
-  
+      console.log("USER FOUND:", user);
+
       const token = jwt.sign(
         { userId: user.id, email: user.email },
         JWT_SECRET,
         { expiresIn: "24h" }
       );
-  
+      console.log("PASSWORD VALID:", validPassword);
       res.json({
         message: "Login success",
         token
       });
   
     } catch (err) {
+      console.error("LOGIN ERROR:", err);
       res.status(500).json({ error: err.message });
+      console.error("LOGIN ERROR:", err);
     }
   
   };

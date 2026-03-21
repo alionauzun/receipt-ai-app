@@ -1,4 +1,5 @@
 const express = require("express");
+const authMiddleware = require("../middleware/authMiddleware");
 const router = express.Router();
 
 const { getDashboard } = require("../services/dashboardService");
@@ -7,10 +8,9 @@ const { getTopProducts } = require("../services/recommendationService");
 const { generateAIInsights } = require("../services/aiService");
 
 router.get("/insights", async (req, res) => {
-
-  try {
-
-    const userId = 1;
+    
+    try {
+    const userId = req.user.userId;
 
     const dashboard = await getDashboard(userId);
     const categories = await getCategoryInsights(userId);
