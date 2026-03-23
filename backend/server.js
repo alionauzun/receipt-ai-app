@@ -10,6 +10,7 @@ const advancedInsightsRoutes = require("./routes/advancedInsightsRoutes");
 const basketRoutes = require("./routes/basketRoutes");
 const comparisonRoutes = require("./routes/comparisonRoutes");
 const predictionRoutes = require("./routes/predictionRoutes");
+const notificationRoutes = require("./routes/notificationRoutes");
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/api/advanced-insights", advancedInsightsRoutes);
 app.use("/api/baskets", basketRoutes);
 app.use("/api/comparisons", comparisonRoutes);
 app.use("/api/predictions", predictionRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 
 app.listen(3000, () => {
