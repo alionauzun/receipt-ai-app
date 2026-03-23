@@ -6,6 +6,7 @@ const analyticsRoutes = require("./routes/analyticsRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const insightRoutes = require("./routes/insightRoutes");
 const aiRoutes = require("./routes/aiRoutes");
+const advancedInsightsRoutes = require("./routes/advancedInsightsRoutes");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use("/api/analytics", analyticsRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/insights", insightRoutes);
 app.use("/api/ai", aiRoutes);
+app.use("/api/advanced-insights", advancedInsightsRoutes);
 
 
 app.listen(3000, () => {
