@@ -25,6 +25,21 @@ exports.uploadReceipt = async (req, res) => {
         match = await learnNewProduct(product.name);
       }
 
+      if (match && (!match.category || match.category === "")) {
+        const category = await classifyCategory(match.name);
+      
+        await pool.query(
+          `
+          UPDATE products
+          SET category = $1
+          WHERE id = $2
+          `,
+          [category, match.id]
+        );
+      
+        match.category = category;
+      }
+
       await pool.query(
         `
         INSERT INTO purchases (user_id, product_id, price, quantity)

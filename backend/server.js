@@ -7,6 +7,9 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const insightRoutes = require("./routes/insightRoutes");
 const aiRoutes = require("./routes/aiRoutes");
 const advancedInsightsRoutes = require("./routes/advancedInsightsRoutes");
+const basketRoutes = require("./routes/basketRoutes");
+const comparisonRoutes = require("./routes/comparisonRoutes");
+const predictionRoutes = require("./routes/predictionRoutes");
 
 const app = express();
 
@@ -20,6 +23,9 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/insights", insightRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/advanced-insights", advancedInsightsRoutes);
+app.use("/api/baskets", basketRoutes);
+app.use("/api/comparisons", comparisonRoutes);
+app.use("/api/predictions", predictionRoutes);
 
 
 app.listen(3000, () => {
